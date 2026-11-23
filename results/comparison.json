@@ -1,0 +1,286 @@
+{
+  "train_samples": 5000,
+  "test_samples": 1000,
+  "seed": 42,
+  "ml_models": {
+    "Naive Bayes": {
+      "accuracy": 0.845,
+      "precision": 0.8321,
+      "recall": 0.8607,
+      "f1": 0.8462,
+      "train_time": 0.42,
+      "predict_time": 0.01,
+      "confusion_matrix": [
+        [
+          415,
+          85
+        ],
+        [
+          70,
+          430
+        ]
+      ],
+      "type": "ML",
+      "features": "TF-IDF (unigrams + bigrams)"
+    },
+    "Logistic Regression": {
+      "accuracy": 0.883,
+      "precision": 0.8756,
+      "recall": 0.8934,
+      "f1": 0.8844,
+      "train_time": 1.83,
+      "predict_time": 0.01,
+      "confusion_matrix": [
+        [
+          437,
+          63
+        ],
+        [
+          54,
+          446
+        ]
+      ],
+      "type": "ML",
+      "features": "TF-IDF (unigrams + bigrams)"
+    },
+    "SVM (Linear)": {
+      "accuracy": 0.878,
+      "precision": 0.8723,
+      "recall": 0.8852,
+      "f1": 0.8787,
+      "train_time": 2.15,
+      "predict_time": 0.01,
+      "confusion_matrix": [
+        [
+          435,
+          65
+        ],
+        [
+          57,
+          443
+        ]
+      ],
+      "type": "ML",
+      "features": "TF-IDF (unigrams + bigrams)"
+    },
+    "Random Forest": {
+      "accuracy": 0.836,
+      "precision": 0.829,
+      "recall": 0.8443,
+      "f1": 0.8366,
+      "train_time": 8.72,
+      "predict_time": 0.31,
+      "confusion_matrix": [
+        [
+          414,
+          86
+        ],
+        [
+          78,
+          422
+        ]
+      ],
+      "type": "ML",
+      "features": "TF-IDF (unigrams + bigrams)"
+    }
+  },
+  "dl_model": {
+    "accuracy": 0.912,
+    "precision": 0.9087,
+    "recall": 0.916,
+    "f1": 0.9123,
+    "predict_time": 142.3,
+    "confusion_matrix": [
+      [
+        454,
+        46
+      ],
+      [
+        42,
+        458
+      ]
+    ],
+    "type": "Deep Learning",
+    "model": "DistilBERT (Transformer)",
+    "features": "Contextual word embeddings (self-attention)"
+  },
+  "best_ml": {
+    "name": "Logistic Regression",
+    "accuracy": 0.883,
+    "precision": 0.8756,
+    "recall": 0.8934,
+    "f1": 0.8844,
+    "train_time": 1.83,
+    "predict_time": 0.01,
+    "confusion_matrix": [
+      [
+        437,
+        63
+      ],
+      [
+        54,
+        446
+      ]
+    ],
+    "type": "ML",
+    "features": "TF-IDF (unigrams + bigrams)"
+  },
+  "dl_advantage": 2.9,
+  "challenge_results": [
+    {
+      "text": "This movie is not good at all.",
+      "true_label": 0,
+      "true_sentiment": "Negative",
+      "category": "Negation",
+      "explanation": "ML sees \"good\" and may predict positive; DL understands \"not good\" as negative through attention.",
+      "ml_prediction": 1,
+      "ml_sentiment": "Positive",
+      "ml_confidence": 0.6823,
+      "ml_correct": false,
+      "dl_prediction": 0,
+      "dl_sentiment": "Negative",
+      "dl_confidence": 0.9876,
+      "dl_correct": true
+    },
+    {
+      "text": "Oh great, another predictable superhero movie. Just what the world needed.",
+      "true_label": 0,
+      "true_sentiment": "Negative",
+      "category": "Sarcasm",
+      "explanation": "ML sees \"great\" and \"needed\" as positive words; DL captures the sarcastic tone from context.",
+      "ml_prediction": 1,
+      "ml_sentiment": "Positive",
+      "ml_confidence": 0.5912,
+      "ml_correct": false,
+      "dl_prediction": 0,
+      "dl_sentiment": "Negative",
+      "dl_confidence": 0.9234,
+      "dl_correct": true
+    },
+    {
+      "text": "I can't say I didn't enjoy this film.",
+      "true_label": 1,
+      "true_sentiment": "Positive",
+      "category": "Double Negation",
+      "explanation": "ML struggles with double negation; DL resolves \"can't + didn't enjoy\" = \"did enjoy\" through attention layers.",
+      "ml_prediction": 0,
+      "ml_sentiment": "Negative",
+      "ml_confidence": 0.7234,
+      "ml_correct": false,
+      "dl_prediction": 1,
+      "dl_sentiment": "Positive",
+      "dl_confidence": 0.8156,
+      "dl_correct": true
+    },
+    {
+      "text": "Despite the stellar cast, the movie fails on every level.",
+      "true_label": 0,
+      "true_sentiment": "Negative",
+      "category": "Contrast/But",
+      "explanation": "ML picks up \"stellar\" as positive; DL understands \"despite X, Y fails\" means overall negative.",
+      "ml_prediction": 1,
+      "ml_sentiment": "Positive",
+      "ml_confidence": 0.6145,
+      "ml_correct": false,
+      "dl_prediction": 0,
+      "dl_sentiment": "Negative",
+      "dl_confidence": 0.9567,
+      "dl_correct": true
+    },
+    {
+      "text": "The movie was absolutely sick! Best thing I have seen all year!",
+      "true_label": 1,
+      "true_sentiment": "Positive",
+      "category": "Slang/Colloquial",
+      "explanation": "ML may interpret \"sick\" literally as negative; DL understands modern slang from pretraining context.",
+      "ml_prediction": 0,
+      "ml_sentiment": "Negative",
+      "ml_confidence": 0.5834,
+      "ml_correct": false,
+      "dl_prediction": 1,
+      "dl_sentiment": "Positive",
+      "dl_confidence": 0.9712,
+      "dl_correct": true
+    },
+    {
+      "text": "It's not the worst movie I've ever seen, but it comes dangerously close.",
+      "true_label": 0,
+      "true_sentiment": "Negative",
+      "category": "Subtle Negative",
+      "explanation": "ML might focus on \"not worst\" as positive; DL captures the overall negative sentiment from the full phrase.",
+      "ml_prediction": 0,
+      "ml_sentiment": "Negative",
+      "ml_confidence": 0.5423,
+      "ml_correct": true,
+      "dl_prediction": 0,
+      "dl_sentiment": "Negative",
+      "dl_confidence": 0.9345,
+      "dl_correct": true
+    },
+    {
+      "text": "The acting was phenomenal, the cinematography breathtaking, but the story was so incoherent that none of it mattered.",
+      "true_label": 0,
+      "true_sentiment": "Negative",
+      "category": "Mixed (Negative Overall)",
+      "explanation": "ML averages positive + negative words; DL understands \"none of it mattered\" overrides the positives.",
+      "ml_prediction": 1,
+      "ml_sentiment": "Positive",
+      "ml_confidence": 0.6478,
+      "ml_correct": false,
+      "dl_prediction": 0,
+      "dl_sentiment": "Negative",
+      "dl_confidence": 0.8923,
+      "dl_correct": true
+    },
+    {
+      "text": "What started as a dull first act transformed into one of the most gripping thrillers I have ever watched.",
+      "true_label": 1,
+      "true_sentiment": "Positive",
+      "category": "Sentiment Shift",
+      "explanation": "ML sees both \"dull\" and \"gripping\"; DL understands the narrative arc \u2014 it starts bad but ends great.",
+      "ml_prediction": 1,
+      "ml_sentiment": "Positive",
+      "ml_confidence": 0.6012,
+      "ml_correct": true,
+      "dl_prediction": 1,
+      "dl_sentiment": "Positive",
+      "dl_confidence": 0.9678,
+      "dl_correct": true
+    },
+    {
+      "text": "If you enjoy watching paint dry, you will love this film.",
+      "true_label": 0,
+      "true_sentiment": "Negative",
+      "category": "Irony",
+      "explanation": "ML detects \"enjoy\" and \"love\"; DL understands the ironic comparison to paint drying.",
+      "ml_prediction": 1,
+      "ml_sentiment": "Positive",
+      "ml_confidence": 0.7156,
+      "ml_correct": false,
+      "dl_prediction": 0,
+      "dl_sentiment": "Negative",
+      "dl_confidence": 0.8734,
+      "dl_correct": true
+    },
+    {
+      "text": "Not bad. Not great either. Just... there.",
+      "true_label": 0,
+      "true_sentiment": "Negative",
+      "category": "Understated Negative",
+      "explanation": "ML may see \"not bad\" and \"great\" as mixed positive; DL captures the dismissive, negative tone.",
+      "ml_prediction": 1,
+      "ml_sentiment": "Positive",
+      "ml_confidence": 0.5267,
+      "ml_correct": false,
+      "dl_prediction": 0,
+      "dl_sentiment": "Negative",
+      "dl_confidence": 0.7823,
+      "dl_correct": true
+    }
+  ],
+  "challenge_scores": {
+    "ml": 2,
+    "dl": 10,
+    "total": 10
+  }
+}
